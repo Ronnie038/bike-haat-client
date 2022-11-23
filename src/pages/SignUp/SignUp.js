@@ -35,7 +35,7 @@ const SignUp = () => {
 				};
 				updateUser(userInfo)
 					.then(() => {
-						saveUser(user.displayName, user.email);
+						saveUser(user.displayName, user.email, data.role);
 					})
 					.catch((err) => console.log(err));
 			})
@@ -45,9 +45,9 @@ const SignUp = () => {
 			});
 	};
 
-	const saveUser = (name, email) => {
-		const user = { name, email };
-		fetch('http://localhost:5000/users', {
+	const saveUser = (name, email, role) => {
+		const user = { name, email, role };
+		fetch(`${process.env.REACT_APP_api_url}/users`, {
 			method: 'post',
 			headers: {
 				'content-type': 'application/json',
@@ -57,9 +57,9 @@ const SignUp = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
-				setCreatedUserEmail(email);
+				// setCreatedUserEmail(email);
 				// getUserToken(email).then(() => {
-				// 	navigate('/');
+				navigate('/');
 				// });
 			})
 			.catch((err) => console.log(err));
@@ -115,16 +115,25 @@ const SignUp = () => {
 									value: 6,
 									message: 'Password must be 6 characters long',
 								},
-								pattern: {
-									value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
-									message:
-										'Password must have uppercase, number and special characters',
-								},
 							})}
 							className='input input-bordered w-full max-w-xs'
 						/>
 						{errors.password && (
 							<p className='text-red-500'>{errors.password.message}</p>
+						)}
+					</div>
+					<div className='form-control select-bordered py-4 '>
+						<select
+							{...register('role', {
+								required: 'Role is required',
+							})}
+						>
+							<option value=''>Select your Role...</option>
+							<option value='buyer'>Buyer</option>
+							<option value='seller'>Seller</option>
+						</select>
+						{errors.role && (
+							<p className='text-red-500'>{errors.role.message}</p>
 						)}
 					</div>
 					<input

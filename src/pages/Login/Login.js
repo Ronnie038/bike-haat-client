@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 // import { UseToken } from '../../ApiServices/auth';
 // import { getUserToken } from '../../ApiServices/auth';
@@ -38,6 +39,7 @@ const Login = () => {
 				// 		navigate('/');
 				// 	}
 				// });
+				toast.success('login successfully');
 				setLoginUserEmail(data.email);
 			})
 			.catch((error) => {

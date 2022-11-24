@@ -1,14 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
+import getUsersByRole from '../../ApiServices/getUsersByRole';
 
 const Allbuyers = () => {
 	const { data: buyers = [], isLoading } = useQuery({
 		queryKey: ['allbuyers'],
 		queryFn: async () => {
-			const res = await axios.get(`${process.env.REACT_APP_api_url}/buyers`);
+			// const res = await axios.get(`${process.env.REACT_APP_api_url}/buyers`);
+			const data = getUsersByRole('buyers');
 
-			return res.data;
+			return data;
 		},
 	});
 

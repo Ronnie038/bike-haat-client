@@ -3,16 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import AuthProvider, { AuthContext } from './contexts/AuthProvider';
-import { ToastBar, Toaster } from 'react-hot-toast';
+import AuthProvider from './contexts/AuthProvider';
+import { Toaster } from 'react-hot-toast';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+// const queryClient = new queryClient()
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<AuthProvider>
-			<App />
-			<Toaster />
-		</AuthProvider>
+		<QueryClientProvider client={queryClient}>
+			<AuthProvider>
+				<App />
+				<Toaster />
+			</AuthProvider>
+		</QueryClientProvider>
 	</React.StrictMode>
 );
 

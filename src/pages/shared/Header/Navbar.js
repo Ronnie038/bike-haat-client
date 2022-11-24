@@ -18,11 +18,9 @@ const Navbar = () => {
 			<li>
 				<Link to='/'>Home</Link>
 			</li>
+
 			<li>
-				<Link to='/appointment'>Appointment</Link>
-			</li>
-			<li>
-				<Link to='/about'>About</Link>
+				<Link to='/blog'>Blog</Link>
 			</li>
 			{user?.uid ? (
 				<>
@@ -69,7 +67,7 @@ const Navbar = () => {
 					</ul>
 				</div>
 				<Link to='/' className='btn btn-ghost normal-case text-xl'>
-					Doctors Portal
+					Bike-Haat
 				</Link>
 			</div>
 			<div className='navbar-center hidden lg:flex'>

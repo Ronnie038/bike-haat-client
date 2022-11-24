@@ -20,7 +20,8 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 		const phone = form.phone.value;
 
 		const bookigOBJ = {
-			buyer: user.name,
+			buyer: user.displayName,
+			email: user.email,
 			model: model,
 			phone: phone,
 			price: resale_price,
@@ -33,7 +34,12 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 				'content-type': 'application/json',
 			},
 			body: JSON.stringify(bookigOBJ),
-		});
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((err) => console.log(err));
 
 		console.log({ location, phone });
 

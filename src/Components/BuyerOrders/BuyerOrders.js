@@ -1,7 +1,22 @@
 import React from 'react';
 import { FaUser } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const BuyerOrders = () => {
+	const { data: bookings = {}, isLoading } = useQuery({
+		queryKey: ['bookings'],
+		queryFn: async () => {
+			try {
+				const res = axios.get(`${process.env.REACT_APP_api_url}/bookings`);
+				const data = (await res).data;
+				return data;
+			} catch (err) {
+				console.log(err);
+			}
+		},
+	});
+
 	return (
 		<div className='overflow-x-auto'>
 			<table className='table w-full'>

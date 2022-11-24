@@ -50,7 +50,7 @@ const Sidebar = ({ role, loading }) => {
 							<Link to='/'> Bike-Haat</Link>
 						</h2>
 						<div className='flex flex-col items-center mt-6 -mx-2'>
-							<p className=' bg-orange-300 min-w-full p-3 text-center rounded-md'>
+							<p className=' bg-orange-300 min-w-full p-3 text-center rounded-md z-50'>
 								Dashboard
 							</p>
 						</div>

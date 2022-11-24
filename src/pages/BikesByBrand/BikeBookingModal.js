@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
+import { FaWizardsOfTheCoast } from 'react-icons/fa';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 	const { user } = useContext(AuthContext);
-	const { brand, model, location, _id, resale_price } = bikeDetail;
+	const { brand, model, location, _id, resale_price, img } = bikeDetail;
 
 	const [bookingDetail, setBookingDetail] = useState({});
 
@@ -26,6 +28,7 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 			phone: phone,
 			price: resale_price,
 			bookingId: _id,
+			img: img,
 		};
 
 		fetch(`${process.env.REACT_APP_api_url}/bookings`, {
@@ -37,7 +40,9 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
+				if (data.acknowledged) {
+					toast.success('congrates booked successfully');
+				}
 			})
 			.catch((err) => console.log(err));
 

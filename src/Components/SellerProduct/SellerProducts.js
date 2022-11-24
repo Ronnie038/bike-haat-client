@@ -7,7 +7,11 @@ import ProductCard from './ProductCard';
 const SellerProduct = () => {
 	const { user } = useContext(AuthContext);
 
-	const { data: sellerProducts = [], isLoading } = useQuery({
+	const {
+		data: sellerProducts = [],
+		isLoading,
+		refetch,
+	} = useQuery({
 		queryKey: ['sellerProducts', user?.email],
 
 		queryFn: async () => {
@@ -24,13 +28,15 @@ const SellerProduct = () => {
 		},
 	});
 
-	console.log(sellerProducts);
+	// console.log(sellerProducts);
 	return (
 		<div>
-			<h3>Your Products are</h3>
-			<div className='flex flex-wrap justify-around'>
+			<h3 className='text-3xl font-bold my-5 bg-amber-300 text-center rounded-md p-5'>
+				{user?.displayName} your Products are
+			</h3>
+			<div className='flex flex-wrap justify-around gap-5'>
 				{sellerProducts?.map((product) => (
-					<ProductCard product={product} key={product._id} />
+					<ProductCard product={product} key={product._id} refetch={refetch} />
 				))}
 			</div>
 		</div>

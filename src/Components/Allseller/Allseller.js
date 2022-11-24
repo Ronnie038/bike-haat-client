@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import React from 'react';
-import { deleteUserById } from '../../ApiServices/deleteUserById';
+import { deleteUserById } from '../../ApiServices/deleteMethods';
 import getUsersByRole from '../../ApiServices/getUsersByRole';
 
 const Allseller = () => {

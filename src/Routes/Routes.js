@@ -3,6 +3,7 @@ import AddProduct from '../Components/AddProduct/AddProduct';
 import Allbuyers from '../Components/Allbuyers/Allbuyers';
 import Allseller from '../Components/Allseller/Allseller';
 import BuyerOrders from '../Components/BuyerOrders/BuyerOrders';
+import SellerProduct from '../Components/SellerProduct/SellerProducts';
 import DashboardLayout from '../Layout/DashboardLayout';
 
 import Main from '../Layout/Main';
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
 			{
 				path: 'addProduct',
 				element: <AddProduct />,
+			},
+			{
+				path: 'myProduct',
+				element: <SellerProduct />,
 			},
 		],
 	},

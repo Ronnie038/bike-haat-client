@@ -8,8 +8,9 @@ const SellerMenu = () => {
 				<li>
 					<Link to='/dashboard/addProduct'>Add a product</Link>
 				</li>
-				<li>My Products</li>
-				<li>My buyers</li>
+				<li>
+					<Link to='/dashboard/myProduct'>My product</Link>
+				</li>
 			</ul>
 		</div>
 	);

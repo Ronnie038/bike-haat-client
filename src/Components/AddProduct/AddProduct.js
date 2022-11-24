@@ -34,7 +34,6 @@ const AddProduct = () => {
 			.then((imgData) => {
 				if (imgData.success) {
 					console.log(imgData.data.url);
-					toast.success('successfully img hosted');
 
 					const bikeDetailObj = {
 						model: data.name,

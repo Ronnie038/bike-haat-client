@@ -1,10 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
+import { deleteUserById } from '../../ApiServices/deleteUserById';
 import getUsersByRole from '../../ApiServices/getUsersByRole';
 
 const Allbuyers = () => {
-	const { data: buyers = [], isLoading } = useQuery({
+	const {
+		data: buyers = [],
+		isLoading,
+		refetch,
+	} = useQuery({
 		queryKey: ['allbuyers'],
 		queryFn: async () => {
 			// const res = await axios.get(`${process.env.REACT_APP_api_url}/buyers`);
@@ -18,6 +23,13 @@ const Allbuyers = () => {
 
 	const handleDelete = (id) => {
 		console.log(id);
+		deleteUserById(id)
+			.then((data) => {
+				if (data.deletedCount) {
+					refetch();
+				}
+			})
+			.catch((err) => console.log(err));
 	};
 
 	return (

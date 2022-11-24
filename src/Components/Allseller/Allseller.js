@@ -22,17 +22,11 @@ const Allseller = () => {
 	const handleDelete = (id) => {
 		deleteUserById(id)
 			.then((data) => {
-				console.log(data);
-				refetch();
+				if (data.deletedCount) {
+					refetch();
+				}
 			})
 			.catch((err) => console.log(err));
-		// fetch(`${process.env.REACT_APP_api_url}/users/${id}`, {
-		// 	method: 'delete',
-		// })
-		// 	.then((res) => res.json())
-		// 	.then((data) => {
-		// 		console.log(data);
-		// 	});
 	};
 	return (
 		<div className='overflow-x-auto'>

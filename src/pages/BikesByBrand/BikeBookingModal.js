@@ -1,12 +1,41 @@
-import React, { useContext } from 'react';
+import axios from 'axios';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 	const { user } = useContext(AuthContext);
-	const { brand, model, location } = bikeDetail;
+	const { brand, model, location, _id, resale_price } = bikeDetail;
+
+	const [bookingDetail, setBookingDetail] = useState({});
+
+	// const bookingInputOnblur = (e) => {
+	// 	setBikeDetail;
+	// 	console.log(e.target.name);
+	// };
 
 	const handleBooking = (e) => {
 		e.preventDefault();
+		const form = e.target;
+		const location = form.location.value;
+		const phone = form.phone.value;
+
+		const bookigOBJ = {
+			buyer: user.name,
+			model: model,
+			phone: phone,
+			price: resale_price,
+			bookingId: _id,
+		};
+
+		fetch(`${process.env.REACT_APP_api_url}/bookings`, {
+			method: 'post',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify(bookigOBJ),
+		});
+
+		console.log({ location, phone });
 
 		setBikeDetail(null);
 	};
@@ -32,6 +61,12 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 							className='input w-full input-bordered '
 							value={`Bike-model : ${model}`}
 						/>
+						<input
+							type='text'
+							disabled
+							className='input w-full input-bordered '
+							value={`price : ${resale_price}`}
+						/>
 
 						<input
 							name='name'
@@ -48,6 +83,12 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 							className='input w-full input-bordered'
 							value={user?.email}
 							disabled
+						/>
+						<input
+							name='location'
+							type='text'
+							placeholder='location where you want meet'
+							className='input w-full input-bordered'
 						/>
 						<input
 							name='phone'

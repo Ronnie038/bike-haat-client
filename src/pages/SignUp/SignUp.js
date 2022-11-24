@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { UseToken } from '../../ApiServices/auth';
+import { saveUser } from '../../ApiServices/saveUser';
 // import { getUserToken } from '../../ApiServices/auth';
 import { AuthContext } from '../../contexts/AuthProvider';
 
@@ -12,7 +13,7 @@ const SignUp = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-	const { createUser, updateUser } = useContext(AuthContext);
+	const { createUser, updateUser, loginWithGoogle } = useContext(AuthContext);
 	const [signUpError, setSignUPError] = useState('');
 	const navigate = useNavigate();
 	const [createdUserEmail, setCreatedUserEmail] = useState('');
@@ -46,22 +47,12 @@ const SignUp = () => {
 			});
 	};
 
-	const saveUser = (name, email, role) => {
-		const user = { name, email, role };
-		fetch(`${process.env.REACT_APP_api_url}/users`, {
-			method: 'post',
-			headers: {
-				'content-type': 'application/json',
-			},
-			body: JSON.stringify(user),
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-				// setCreatedUserEmail(email);
-				// getUserToken(email).then(() => {
-				navigate('/');
-				// });
+	const googleLogin = () => {
+		loginWithGoogle()
+			.then((result) => {
+				const user = result.user;
+				saveUser(user.displayName, user.email);
+				console.log(user);
 			})
 			.catch((err) => console.log(err));
 	};
@@ -112,10 +103,6 @@ const SignUp = () => {
 							type='password'
 							{...register('password', {
 								required: 'Password is required',
-								minLength: {
-									value: 6,
-									message: 'Password must be 6 characters long',
-								},
 							})}
 							className='input input-bordered w-full max-w-xs'
 						/>
@@ -151,7 +138,9 @@ const SignUp = () => {
 					</Link>
 				</p>
 				<div className='divider'>OR</div>
-				<button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+				<button onClick={googleLogin} className='btn btn-outline w-full'>
+					CONTINUE WITH GOOGLE
+				</button>
 			</div>
 		</div>
 	);

@@ -5,7 +5,17 @@ const ProductCard = ({ product, refetch }) => {
 	const { img, resale_price, _id } = product;
 
 	const handleAdvirtise = (id) => {
-		console.log(id);
+		fetch(`${process.env.REACT_APP_api_url}/addAdvertise/${id}`, {
+			method: 'put',
+			headers: {
+				'content-type': 'application/json',
+			},
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((err) => console.log(err));
 	};
 
 	const handleDelete = (id) => {

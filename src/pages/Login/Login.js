@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { saveUser } from '../../ApiServices/saveUser';
 // import { UseToken } from '../../ApiServices/auth';
 // import { getUserToken } from '../../ApiServices/auth';
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -13,7 +14,7 @@ const Login = () => {
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
-	const { signIn } = useContext(AuthContext);
+	const { signIn, loginWithGoogle } = useContext(AuthContext);
 
 	const [loginError, setLoginError] = useState('');
 
@@ -40,6 +41,7 @@ const Login = () => {
 				// 		navigate('/');
 				// 	}
 				// });
+
 				navigate('/');
 				toast.success('login successfull');
 				setLoginUserEmail(data.email);
@@ -48,6 +50,16 @@ const Login = () => {
 				console.log(error.message);
 				setLoginError(error.message);
 			});
+	};
+
+	const googleLogin = () => {
+		loginWithGoogle()
+			.then((result) => {
+				const user = result.user;
+				saveUser(user.displayName, user.email);
+				console.log(user);
+			})
+			.catch((err) => console.log(err));
 	};
 
 	return (
@@ -81,10 +93,6 @@ const Login = () => {
 							autoComplete='on'
 							{...register('password', {
 								required: 'Password is required',
-								minLength: {
-									value: 6,
-									message: 'Password must be 6 characters or longer',
-								},
 							})}
 							className='input input-bordered w-full max-w-xs'
 						/>
@@ -106,13 +114,15 @@ const Login = () => {
 					</div>
 				</form>
 				<p>
-					New to Doctors Portal{' '}
+					New to Bike-haat?{' '}
 					<Link className='text-secondary' to='/signup'>
 						Create new Account
 					</Link>
 				</p>
 				<div className='divider'>OR</div>
-				<button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+				<button onClick={googleLogin} className='btn btn-outline w-full'>
+					CONTINUE WITH GOOGLE
+				</button>
 			</div>
 		</div>
 	);

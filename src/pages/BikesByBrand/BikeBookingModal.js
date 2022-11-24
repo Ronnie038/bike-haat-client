@@ -1,6 +1,4 @@
-import axios from 'axios';
 import React, { useContext, useState } from 'react';
-import { FaWizardsOfTheCoast } from 'react-icons/fa';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
 

@@ -66,9 +66,9 @@ const Sidebar = ({ role, loading }) => {
 							)}
 						</nav> */}
 
-						{/* <AdminMenu /> */}
+						<AdminMenu />
 						<BuyerMenu />
-						{/* <SellerMenu /> */}
+						<SellerMenu />
 					</div>
 				</div>
 

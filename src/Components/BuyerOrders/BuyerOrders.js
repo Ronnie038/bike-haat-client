@@ -3,10 +3,12 @@ import { FaUser } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthProvider';
+import CheckoutModal from './CheckoutModal';
 
 const BuyerOrders = () => {
 	const { user } = useContext(AuthContext);
 	const [bookings, setBookings] = useState([]);
+	const [toggle, setToggle] = useState(false);
 
 	useEffect(() => {
 		axios
@@ -46,7 +48,13 @@ const BuyerOrders = () => {
 							<td>{booking.price}</td>
 							<th>
 								{!booking.paid ? (
-									<button className='btn  btn-xs btn-warning'>pay</button>
+									<label
+										onClick={() => setToggle((prev) => !prev)}
+										htmlFor='payment-modal'
+										className='btn  btn-xs btn-warning'
+									>
+										pay
+									</label>
 								) : (
 									'paid'
 								)}
@@ -65,6 +73,8 @@ const BuyerOrders = () => {
 					</tr>
 				</tfoot>
 			</table>
+
+			<CheckoutModal />
 		</div>
 	);
 };

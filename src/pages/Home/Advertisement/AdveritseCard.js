@@ -1,34 +1,35 @@
 import React from 'react';
+import { MdVerified } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 const AdveritseCard = ({ product }) => {
 	console.log(product);
-	const { brand, condition, model, resale_price, img, location, description } =
-		product;
+	const {
+		brand,
+		condition,
+		model,
+		resale_price,
+		img,
+		seller_name,
+		location,
+		description,
+	} = product;
 
 	return (
-		<div className='card w-96 bg-base-100 shadow-xl'>
+		<div className=' bg-base-100  shadow-xl '>
 			<figure>
-				<img src={img} alt={model} />
+				<img src={img} alt={model} className='' />
 			</figure>
-			<div className='card-body'>
-				<h2 className='card-title'>
-					Brand:
-					<div className='badge badge-secondary'>{brand}</div>
-				</h2>
-				<h2 className='card-title'>
-					Price:
-					<div className='badge badge-secondary'>${resale_price}</div>
-				</h2>
-				<h2 className='card-title'>
-					Location:
-					<div className='badge badge-secondary'>{location}</div>
-				</h2>
-				<p>{description}</p>
-				<div className='card-actions justify-end '>
-					<Link className='btn btn-primary btn-xs' to={`/bikes/${brand}`}>
-						See More
-					</Link>
+			<div className='p-5'>
+				<p>Brand : {brand}</p>
+				<p>Model : {model}</p>
+				<p>Condition : {condition}</p>
+				<p>Price : {resale_price}</p>
+				<div className=''>
+					<p className='flex'>
+						<span className='font-bold'>Seller</span>: {seller_name}
+						<MdVerified className=' text-blue-600' />
+					</p>
 				</div>
 			</div>
 		</div>
@@ -36,3 +37,10 @@ const AdveritseCard = ({ product }) => {
 };
 
 export default AdveritseCard;
+{
+	/* <div className='card-actions justify-end '>
+<Link className='btn btn-primary btn-xs' to={`/bikes/${brand}`}>
+	See More
+</Link>
+</div> */
+}

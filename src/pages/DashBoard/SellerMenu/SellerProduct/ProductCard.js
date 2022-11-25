@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteProductById } from '../../ApiServices/deleteMethods';
+import { deleteProductById } from '../../../../ApiServices/deleteMethods';
 
 const ProductCard = ({ product, refetch }) => {
 	const { img, resale_price, _id } = product;
@@ -27,7 +27,7 @@ const ProductCard = ({ product, refetch }) => {
 			.catch((err) => console.log(err));
 	};
 	return (
-		<div className='card w-96 bg-base-100 shadow-xl'>
+		<div className='card  bg-base-100 shadow-xl'>
 			<figure>
 				<img src={img} alt='Shoes' />
 			</figure>

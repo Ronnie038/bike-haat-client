@@ -18,17 +18,23 @@ const Advertisement = () => {
 			}
 		},
 	});
+	if (advertisedProducts.length < 1) {
+		return;
+	}
 
 	console.log(advertisedProducts);
 	return (
-		<div>
-			<h1 className='text-3xl'> Advertisement</h1>
-			<div className=''>
-				{advertisedProducts?.map((product) => (
-					<AdveritseCard product={product} key={product._id} />
-				))}
+		<>
+			<div className='my-5'>
+				<h1 className='text-3xl text-center my-5'> Advertisement</h1>
+				<div className='flex flex-wrap'>
+					{advertisedProducts?.map((product) => (
+						<AdveritseCard product={product} key={product._id} />
+					))}
+				</div>
 			</div>
-		</div>
+			<hr />
+		</>
 	);
 };
 

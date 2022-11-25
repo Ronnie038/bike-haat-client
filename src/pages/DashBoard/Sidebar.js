@@ -6,9 +6,10 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import PrimaryButton from '../Button/PrimaryButton';
 import { AuthContext } from '../../contexts/AuthProvider';
-import AdminMenu from './AdminMenu';
-import BuyerMenu from './BuyerMenu';
-import SellerMenu from './SellerMenu';
+
+import AdminMenu from './AdminMenu/AdminMenu';
+import BuyerMenu from './BuyerMenu/BuyerMenu';
+import SellerMenu from './SellerMenu/SellerMenu';
 import { FaBars } from 'react-icons/fa';
 
 const Sidebar = ({ role, loading }) => {
@@ -22,7 +23,7 @@ const Sidebar = ({ role, loading }) => {
 	return (
 		<>
 			{/* Small Screen Navbar */}
-			<div className='bg-gray-100 text-gray-800 flex justify-between md:hidden'>
+			<div className='bg-gray-100 text-gray-800 flex justify-between ml-auto md:hidden'>
 				<div>
 					<div className='block cursor-pointer p-4 font-bold'>
 						<Link to='/'>Bike-Haat</Link>

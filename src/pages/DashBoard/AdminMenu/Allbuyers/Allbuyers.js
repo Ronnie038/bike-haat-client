@@ -1,25 +1,28 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-
 import React from 'react';
-import { deleteUserById } from '../../ApiServices/deleteMethods';
-import getUsersByRole from '../../ApiServices/getUsersByRole';
+import { deleteUserById } from '../../../../ApiServices/deleteMethods';
+import getUsersByRole from '../../../../ApiServices/getUsersByRole';
 
-const Allseller = () => {
+const Allbuyers = () => {
 	const {
-		data: sellers = [],
+		data: buyers = [],
 		isLoading,
 		refetch,
 	} = useQuery({
-		queryKey: ['sellers'],
-		queryFn: () => {
-			const data = getUsersByRole('sellers');
+		queryKey: ['allbuyers'],
+		queryFn: async () => {
+			// const res = await axios.get(`${process.env.REACT_APP_api_url}/buyers`);
+			const data = getUsersByRole('buyers');
+
 			return data;
 		},
 	});
-	console.log(sellers);
+
+	console.log(buyers);
 
 	const handleDelete = (id) => {
+		console.log(id);
 		deleteUserById(id)
 			.then((data) => {
 				if (data.deletedCount) {
@@ -28,6 +31,7 @@ const Allseller = () => {
 			})
 			.catch((err) => console.log(err));
 	};
+
 	return (
 		<div className='overflow-x-auto'>
 			<table className='table w-full'>
@@ -37,24 +41,23 @@ const Allseller = () => {
 						<th></th>
 						<th>Name</th>
 						<th>email</th>
-						<th>Status</th>
-						<th>control</th>
+						<th>Control</th>
 					</tr>
 				</thead>
 				<tbody>
-					{sellers?.map((seller, idx) => (
-						<tr key={seller._id}>
+					{buyers?.map((buyer, idx) => (
+						<tr key={buyer._id}>
 							<th>{idx + 1}</th>
-							<td>{seller.name}</td>
-							<td>{seller.email}</td>
-							<td>{seller.verified ? 'verified' : 'verify'}</td>
+							<td>{buyer.name}</td>
+							<td>{buyer.email}</td>
 							<td>
+								{' '}
 								<button
-									onClick={() => handleDelete(seller._id)}
+									onClick={() => handleDelete(buyer._id)}
 									className='btn btn-xs btn-warning'
 								>
-									delete
-								</button>
+									Delete
+								</button>{' '}
 							</td>
 						</tr>
 					))}
@@ -64,4 +67,4 @@ const Allseller = () => {
 	);
 };
 
-export default Allseller;
+export default Allbuyers;

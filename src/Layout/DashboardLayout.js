@@ -16,7 +16,7 @@ const DashboardLayout = () => {
 		//   })
 	}, [user]);
 	return (
-		<div className='relative min-h-screen md:flex'>
+		<div className='relative mx-auto min-h-screen md:flex max-w-7xl'>
 			{/* {loading ? (
 				''
 			) : ( */}

@@ -5,10 +5,14 @@ import Navbar from '../pages/shared/Header/Navbar';
 
 const Layout = () => {
 	return (
-		<div>
-			<Navbar />
-			<Outlet />
-			<Footer />
+		<div className='flex min-h-screen justify-between flex-col  mx-auto max-w-7xl'>
+			<div className=''>
+				<Navbar />
+				<Outlet />
+			</div>
+			<div className=''>
+				<Footer />
+			</div>
 		</div>
 	);
 };

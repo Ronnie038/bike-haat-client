@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthProvider';
+import { AuthContext } from '../../../../contexts/AuthProvider';
 
 const AddProduct = () => {
 	const {
@@ -41,6 +41,7 @@ const AddProduct = () => {
 						resale_price: data.price,
 						orginal_price: data.orginal_price,
 						email: user.email,
+						seller_name: user.displayName,
 						phone: data.phone,
 						location: data.location,
 						purchase_date: data.date,
@@ -73,7 +74,7 @@ const AddProduct = () => {
 	};
 	return (
 		<div>
-			<div className='h-[800px] flex justify-center items-center'>
+			<div className=' flex justify-center items-center'>
 				<div className='w-96 p-7'>
 					<h2 className='text-xl text-center'>Add your product here</h2>
 					<form onSubmit={handleSubmit(handleAddBike)}>

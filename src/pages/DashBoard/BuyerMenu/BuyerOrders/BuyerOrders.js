@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { AuthContext } from '../../contexts/AuthProvider';
+
 import CheckoutModal from './CheckoutModal';
+import { AuthContext } from '../../../../contexts/AuthProvider';
 
 const BuyerOrders = () => {
 	const { user } = useContext(AuthContext);

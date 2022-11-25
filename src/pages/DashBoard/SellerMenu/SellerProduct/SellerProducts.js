@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthProvider';
+import { AuthContext } from '../../../../contexts/AuthProvider';
 import ProductCard from './ProductCard';
 
 const SellerProduct = () => {
@@ -12,7 +12,7 @@ const SellerProduct = () => {
 		isLoading,
 		refetch,
 	} = useQuery({
-		queryKey: ['sellerProducts', user?.email],
+		queryKey: ['sellerProducts', user],
 
 		queryFn: async () => {
 			try {

@@ -11,10 +11,13 @@ import AdminMenu from './AdminMenu/AdminMenu';
 import BuyerMenu from './BuyerMenu/BuyerMenu';
 import SellerMenu from './SellerMenu/SellerMenu';
 import { FaBars } from 'react-icons/fa';
+import useRoutesByRole from '../../ApiServices/useRoutesByRole';
 
-const Sidebar = ({ role, loading }) => {
+const Sidebar = () => {
 	const { user, logout } = useContext(AuthContext);
 	const [isActive, setActive] = useState('false');
+	const [role, isRoleLoading] = useRoutesByRole(user?.email);
+	console.log(role);
 
 	// Sidebar Responsive Handler
 	const handleToggle = () => {
@@ -66,10 +69,12 @@ const Sidebar = ({ role, loading }) => {
 								<UserMenu />
 							)}
 						</nav> */}
-
+						{/* {role === 'admin' && <AdminMenu />}
+						{role === 'seller' && <SellerMenu />}
+						{role === 'buyer' && <BuyerMenu />} */}
 						<AdminMenu />
-						<BuyerMenu />
 						<SellerMenu />
+						<BuyerMenu />
 					</div>
 				</div>
 

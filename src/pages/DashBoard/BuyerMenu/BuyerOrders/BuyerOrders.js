@@ -14,7 +14,11 @@ const BuyerOrders = () => {
 
 	const [product, setProduct] = useState(null);
 
-	const { data: bookings = [], isLoading } = useQuery({
+	const {
+		data: bookings = [],
+		isLoading,
+		refetch,
+	} = useQuery({
 		queryKey: ['bookings', user?.email],
 		queryFn: async () => {
 			try {
@@ -98,7 +102,7 @@ const BuyerOrders = () => {
 			</table>
 
 			{/* <CheckoutModal /> */}
-			{product && <CheckoutModal product={product} />}
+			{product && <CheckoutModal product={product} refetch={refetch} />}
 		</div>
 	);
 };

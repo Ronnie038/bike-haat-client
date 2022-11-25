@@ -25,7 +25,7 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 			model: model,
 			phone: phone,
 			price: resale_price,
-			bookingId: _id,
+			productId: _id,
 			img: img,
 		};
 

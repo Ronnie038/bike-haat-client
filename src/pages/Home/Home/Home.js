@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../../shared/Header/Navbar';
 import Advertisement from '../Advertisement/Advertisement';
-import Category from '../Category/Category';
+import Category from '../bikesByCategory/Category';
 import Hero from '../HeroSection/Hero';
 
 const Home = () => {

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
+import AdveritseCard from './AdveritseCard';
 
 const Advertisement = () => {
 	const { data: advertisedProducts = [], isLoading } = useQuery({
@@ -22,17 +23,10 @@ const Advertisement = () => {
 	return (
 		<div>
 			<h1 className='text-3xl'> Advertisement</h1>
-			<div className='card card-side bg-base-100 shadow-xl'>
-				<figure>
-					<img src='https://placeimg.com/200/280/arch' alt='Movie' />
-				</figure>
-				<div className='card-body'>
-					<h2 className='card-title'>New movie is released!</h2>
-					<p>Click the button to watch on Jetflix app.</p>
-					<div className='card-actions justify-end'>
-						<button className='btn btn-primary'>Watch</button>
-					</div>
-				</div>
+			<div className=''>
+				{advertisedProducts?.map((product) => (
+					<AdveritseCard product={product} key={product._id} />
+				))}
 			</div>
 		</div>
 	);

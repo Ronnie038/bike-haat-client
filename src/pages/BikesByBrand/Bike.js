@@ -1,12 +1,11 @@
-import { spread } from 'axios';
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { MdVerified } from 'react-icons/md';
+import useVerifiedSeller from '../../ApiServices/useVerifiedSeller';
 
 const Bike = ({ bike, setBikeDetail }) => {
 	console.log(bike);
 	const {
-		_id,
 		brand,
 		condition,
 		img,
@@ -18,10 +17,14 @@ const Bike = ({ bike, setBikeDetail }) => {
 		location,
 		description,
 		phone,
+		email,
 		seller_name,
 	} = bike;
 
+	console.log(email);
+
 	const [rating, setRating] = useState([0, 0, 0, 0, 0]);
+	const [isVerified, isSellerLoading] = useVerifiedSeller(email);
 
 	return (
 		<div className=' px-5 my-10 '>
@@ -58,7 +61,7 @@ const Bike = ({ bike, setBikeDetail }) => {
 						<p className='flex'>
 							<span>Seller: </span>
 							{seller_name}
-							<MdVerified className=' text-blue-500' />
+							{isVerified && <MdVerified className=' text-blue-500' />}
 						</p>
 					</div>
 					<p className='text-xl font-bold'>Orginal Price: ${orginal_price}</p>

@@ -1,19 +1,14 @@
 import React from 'react';
 import { MdVerified } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import useVerifiedSeller from '../../../ApiServices/useVerifiedSeller';
 
 const AdveritseCard = ({ product }) => {
 	console.log(product);
-	const {
-		brand,
-		condition,
-		model,
-		resale_price,
-		img,
-		seller_name,
-		location,
-		description,
-	} = product;
+	const { brand, condition, model, resale_price, img, seller_name, email } =
+		product;
+
+	const [isVerified, isSellerLoading] = useVerifiedSeller(email);
 
 	return (
 		<div className=' bg-base-100  shadow-xl '>
@@ -28,8 +23,13 @@ const AdveritseCard = ({ product }) => {
 				<div className=''>
 					<p className='flex'>
 						<span className='font-bold'>Seller</span>: {seller_name}
-						<MdVerified className=' text-blue-600' />
+						{isVerified && <MdVerified className=' text-blue-600' />}
 					</p>
+				</div>
+				<div className='card-actions justify-end '>
+					<Link className='btn btn-primary btn-xs' to={`/bikes/${brand}`}>
+						See More
+					</Link>
 				</div>
 			</div>
 		</div>
@@ -37,10 +37,3 @@ const AdveritseCard = ({ product }) => {
 };
 
 export default AdveritseCard;
-{
-	/* <div className='card-actions justify-end '>
-<Link className='btn btn-primary btn-xs' to={`/bikes/${brand}`}>
-	See More
-</Link>
-</div> */
-}

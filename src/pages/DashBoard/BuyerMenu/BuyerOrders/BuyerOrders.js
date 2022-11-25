@@ -3,20 +3,42 @@ import { FaUser } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import CheckoutModal from './CheckoutModal';
+// import CheckoutModal from '../../Payment/CheckoutModal';
 import { AuthContext } from '../../../../contexts/AuthProvider';
+import CheckoutModal from '../../Payment/CheckoutModal';
 
 const BuyerOrders = () => {
 	const { user } = useContext(AuthContext);
-	const [bookings, setBookings] = useState([]);
+	// const [bookings, setBookings] = useState([]);
 	const [toggle, setToggle] = useState(false);
 
-	useEffect(() => {
-		axios
-			.get(`${process.env.REACT_APP_api_url}/bookings?email=${user?.email}`)
-			.then((res) => setBookings(res.data))
-			.catch((err) => console.log(err));
-	}, [user?.email]);
+	const [product, setProduct] = useState(null);
+
+	const { data: bookings = [], isLoading } = useQuery({
+		queryKey: ['bookings', user?.email],
+		queryFn: async () => {
+			try {
+				const res = axios.get(
+					`${process.env.REACT_APP_api_url}/bookings?email=${user?.email}`
+				);
+
+				return (await res).data;
+			} catch (err) {
+				console.log(err);
+			}
+		},
+	});
+
+	if (isLoading) {
+		return <div className='text-3xl'>......LOADING</div>;
+	}
+
+	// useEffect(() => {
+	// 	axios
+	// 		.get(`${process.env.REACT_APP_api_url}/bookings?email=${user?.email}`)
+	// 		.then((res) => setBookings(res.data))
+	// 		.catch((err) => console.log(err));
+	// }, [user?.email]);
 
 	return (
 		<div className='overflow-x-auto w-full'>
@@ -50,7 +72,7 @@ const BuyerOrders = () => {
 							<th>
 								{!booking.paid ? (
 									<label
-										onClick={() => setToggle((prev) => !prev)}
+										onClick={() => setProduct(booking)}
 										htmlFor='payment-modal'
 										className='btn  btn-xs btn-warning'
 									>
@@ -75,7 +97,8 @@ const BuyerOrders = () => {
 				</tfoot>
 			</table>
 
-			<CheckoutModal />
+			{/* <CheckoutModal /> */}
+			{product && <CheckoutModal product={product} />}
 		</div>
 	);
 };

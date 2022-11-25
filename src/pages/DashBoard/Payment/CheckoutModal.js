@@ -1,6 +1,7 @@
 import React from 'react';
 
-const CheckoutModal = () => {
+const CheckoutModal = ({ product }) => {
+	console.log(product);
 	return (
 		<div>
 			<input type='checkbox' id='payment-modal' className='modal-toggle' />
@@ -12,7 +13,7 @@ const CheckoutModal = () => {
 					>
 						✕
 					</label>
-					<h3 className='text-lg font-bold'>Bike-brand: </h3>
+					<h3 className='text-lg font-bold'> Payment for {product.model} </h3>
 					<form
 						// onSubmit={handleBooking}
 						className='grid grid-cols-1 gap-3 mt-10'

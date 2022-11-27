@@ -15,7 +15,7 @@ const BuyerMenu = () => {
 								: 'linkRoute flex items-center my-5'
 						}
 					>
-						<MdProductionQuantityLimits className='mx-2 text-xl text-red-300' />
+						<MdProductionQuantityLimits className='mx-2 text-xl text-green-300' />
 						My orders
 					</NavLink>
 				</li>

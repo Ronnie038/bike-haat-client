@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import ComponentLoader from '../../../../Components/Loader/ComponentLoader';
 import Loader from '../../../../Components/Loader/Loader';
 import { AuthContext } from '../../../../contexts/AuthProvider';
@@ -13,10 +13,11 @@ const AddProduct = () => {
 		handleSubmit,
 		reset,
 	} = useForm();
+	const [nav, setNav] = useState(false);
 	const { user } = useContext(AuthContext);
 	const [loading, setLoading] = useState(false);
+
 	const img_host_key = process.env.REACT_APP_imgbb_key;
-	// console.log(img_host_key);
 
 	const handleAddBike = (data) => {
 		setLoading(true);
@@ -28,8 +29,8 @@ const AddProduct = () => {
 		const url = `https://api.imgbb.com/1/upload?key=${img_host_key}`;
 		const timeElapsed = Date.now();
 		const today = new Date(timeElapsed);
-
 		const postDate = today.toDateString();
+		const upperCasedBrand = data.brand.toUpperCase();
 
 		fetch(url, {
 			method: 'post',
@@ -42,7 +43,7 @@ const AddProduct = () => {
 
 					const bikeDetailObj = {
 						model: data.name,
-						brand: data.brand,
+						brand: upperCasedBrand,
 						resale_price: data.price,
 						orginal_price: data.orginal_price,
 						email: user.email,
@@ -69,7 +70,7 @@ const AddProduct = () => {
 						.then((data) => {
 							console.log(data);
 							toast.success('successfully product added');
-							reset();
+							setNav(true);
 						})
 						.catch((err) => console.log(err));
 				}
@@ -84,8 +85,11 @@ const AddProduct = () => {
 		<div>
 			<div className=' flex justify-center items-center relative'>
 				{loading && <ComponentLoader />}
+				{nav && <Navigate to='/dashboard/myProduct' replace={true} />}
 				<div className='w-96 p-7'>
-					<h2 className='text-xl text-center'>Add your product here</h2>
+					<h2 className='text-xl text-center border-b-2 py-2'>
+						Add your product here
+					</h2>
 					<form onSubmit={handleSubmit(handleAddBike)}>
 						<div className='flex md:flex-row flex-col gap-3'>
 							<div className='form-control w-full max-w-xs'>
@@ -286,7 +290,7 @@ const AddProduct = () => {
 						</div>
 
 						<input
-							className='btn btn-bg w-full text-white my-2'
+							className='btn btn-primary w-full text-white my-2'
 							value='Add Product'
 							type='submit'
 						/>

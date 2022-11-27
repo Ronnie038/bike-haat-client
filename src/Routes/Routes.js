@@ -15,12 +15,15 @@ import Allseller from '../pages/DashBoard/AdminMenu/Allseller/Allseller';
 import BuyerOrders from '../pages/DashBoard/BuyerMenu/BuyerOrders/BuyerOrders';
 import PrivateRoute from './PrivateRoutes/PrivateRoutes';
 import AdminRoute from './PrivateRoutes/AdminRoute';
+import ReportedItems from '../pages/DashBoard/AdminMenu/ReportedItems/ReportedItems';
+import ErrorElement from '../pages/ErrorElement/ErrorElement';
+import WelcomePage from '../pages/DashBoard/WelcomeDashBoard/WelcomePage';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <Main />,
-		errorElement: <div className='text-3xl text-red-500'>404 NOT FOUND</div>,
+		errorElement: <ErrorElement />,
 		children: [
 			{
 				path: '/',
@@ -53,10 +56,11 @@ const router = createBrowserRouter([
 				<DashboardLayout />
 			</PrivateRoute>
 		),
+		errorElement: <ErrorElement />,
 		children: [
 			{
 				path: '',
-				element: <div>hello bangladesh</div>,
+				element: <WelcomePage />,
 			},
 			{
 				path: 'orders',
@@ -75,6 +79,14 @@ const router = createBrowserRouter([
 				element: (
 					<AdminRoute>
 						<Allseller />
+					</AdminRoute>
+				),
+			},
+			{
+				path: 'reported',
+				element: (
+					<AdminRoute>
+						<ReportedItems />
 					</AdminRoute>
 				),
 			},

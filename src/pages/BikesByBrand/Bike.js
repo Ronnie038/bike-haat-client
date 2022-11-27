@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaStar } from 'react-icons/fa';
 import { MdVerified } from 'react-icons/md';
 import useVerifiedSeller from '../../ApiServices/useVerifiedSeller';
@@ -19,12 +20,25 @@ const Bike = ({ bike, setBikeDetail }) => {
 		phone,
 		email,
 		seller_name,
+		_id,
 	} = bike;
 
 	console.log(email);
 
 	const [rating, setRating] = useState([0, 0, 0, 0, 0]);
 	const [isVerified, isSellerLoading] = useVerifiedSeller(email);
+
+	const handleReport = (id) => {
+		fetch(`${process.env.REACT_APP_api_url}/reported/${id}`, {
+			method: 'PUT',
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				toast.success('reported product');
+				console.log(data);
+			})
+			.catch((err) => console.log(err));
+	};
 
 	return (
 		<div className=' px-5 my-10 '>
@@ -69,6 +83,16 @@ const Bike = ({ bike, setBikeDetail }) => {
 						Resale Price: <span className='text-info'>${resale_price}</span>
 					</p>
 					<p>Phone No. {phone}</p>
+					<p>
+						Report:
+						<button
+							onClick={() => handleReport(_id)}
+							className='btn btn-xs btn-error ml-2'
+						>
+							{' '}
+							To admin
+						</button>
+					</p>
 
 					<div className='card-actions justify-end'>
 						<label
@@ -77,7 +101,7 @@ const Bike = ({ bike, setBikeDetail }) => {
 							htmlFor='booking-modal'
 						>
 							{' '}
-							Book
+							Book now
 						</label>
 					</div>
 				</div>

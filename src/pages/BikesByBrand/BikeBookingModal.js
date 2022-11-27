@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
 import Loader from '../../Components/Loader/Loader';
+import ComponentLoader from '../../Components/Loader/ComponentLoader';
 
 const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 	const { user } = useContext(AuthContext);
@@ -9,11 +10,6 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 
 	const [bookingDetail, setBookingDetail] = useState({});
 	const [loading, setLoading] = useState(false);
-
-	// const bookingInputOnblur = (e) => {
-	// 	setBikeDetail;
-	// 	console.log(e.target.name);
-	// };
 
 	const handleBooking = (e) => {
 		e.preventDefault();
@@ -43,19 +39,16 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 			.then((data) => {
 				if (data.acknowledged) {
 					toast.success('congrates booked successfully');
-					setLoading(false);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => console.log(err))
+			.finally(() => {
+				setLoading(false);
 
-		console.log({ location, phone });
-
-		setBikeDetail(null);
+				setBikeDetail(null);
+			});
 	};
 
-	if (loading) {
-		return <Loader />;
-	}
 	return (
 		<div>
 			<input type='checkbox' id='booking-modal' className='modal-toggle' />
@@ -115,7 +108,7 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 						/>
 						<br />
 						<input
-							className='btn btn-accent w-full'
+							className='btn btn-primary w-full'
 							type='submit'
 							value='Submit'
 						/>

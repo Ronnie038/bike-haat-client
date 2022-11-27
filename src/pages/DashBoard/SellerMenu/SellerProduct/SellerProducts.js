@@ -33,12 +33,13 @@ const SellerProduct = () => {
 		return <ComponentLoader />;
 	}
 
-	// console.log(sellerProducts);
 	return (
 		<div>
-			<h3 className='text-3xl font-bold my-5 bg-secondary-content text-center rounded-md p-5'>
-				{user?.displayName} your Products are
-			</h3>
+			<div className=' border-b-2 mb-5'>
+				<h3 className='text-3xl font-bold mt-5 mb-2  text-center rounded-md p-5 '>
+					{user?.displayName} your Products are
+				</h3>
+			</div>
 			<div className='flex flex-wrap justify-around gap-5'>
 				{sellerProducts.length >= 1 ? (
 					sellerProducts?.map((product) => (

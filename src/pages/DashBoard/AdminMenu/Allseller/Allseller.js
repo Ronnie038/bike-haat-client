@@ -29,21 +29,25 @@ const Allseller = () => {
 	console.log(sellers);
 
 	const handleDelete = (id) => {
-		deleteUserById(id)
-			.then((res) => {
-				if (res.status === 403 || res.status === 401) {
-					logOut().then(() => {
-						toast.error('permission forbidden');
-					});
-				}
-				return res.json();
-			})
-			.then((data) => {
-				if (data.deletedCount) {
-					refetch();
-				}
-			})
-			.catch((err) => console.log(err));
+		const confirm = window.confirm('are you sure you want to delete');
+
+		if (confirm) {
+			deleteUserById(id)
+				.then((res) => {
+					if (res.status === 403 || res.status === 401) {
+						logOut().then(() => {
+							toast.error('permission forbidden');
+						});
+					}
+					return res.json();
+				})
+				.then((data) => {
+					if (data.deletedCount) {
+						refetch();
+					}
+				})
+				.catch((err) => console.log(err));
+		}
 	};
 
 	const verifySeller = (id) => {
@@ -60,7 +64,7 @@ const Allseller = () => {
 				{/* <!-- head --> */}
 				<thead>
 					<tr>
-						<th></th>
+						<td className=''></td>
 						<th>Name</th>
 						<th>email</th>
 						<th>Status</th>
@@ -70,7 +74,7 @@ const Allseller = () => {
 				<tbody>
 					{sellers?.map((seller, idx) => (
 						<tr key={seller._id}>
-							<th>{idx + 1}</th>
+							<td className=''>{idx + 1}</td>
 							<td className='flex'>
 								{seller.name}{' '}
 								{seller.verified && <MdVerified className='text-blue-500' />}

@@ -20,6 +20,9 @@ const ProductCard = ({ product, refetch }) => {
 	};
 
 	const handleDelete = (id) => {
+		const confirm = window.confirm('are you sure you want to delete');
+		if (!confirm) return;
+
 		deleteProductById(id)
 			.then((data) => {
 				console.log(data);

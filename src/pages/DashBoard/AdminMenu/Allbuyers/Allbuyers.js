@@ -29,36 +29,40 @@ const Allbuyers = () => {
 	console.log(buyers);
 
 	const handleDelete = (id) => {
+		const confirm = window.confirm('are you sure you want to delete');
 		console.log(id);
-		deleteUserById(id)
-			.then((res) => {
-				if (res.status === 403 || res.status === 401) {
-					logOut()
-						.then(() => {
-							toast.error('permission forbidden');
-						})
-						.catch((err) => console.log(err));
-					return;
-				}
+		if (confirm) {
+			deleteUserById(id)
+				.then((res) => {
+					if (res.status === 403 || res.status === 401) {
+						logOut()
+							.then(() => {
+								toast.error('permission forbidden');
+							})
+							.catch((err) => console.log(err));
+						return;
+					}
 
-				return res.json();
-			})
-			.then((data) => {
-				console.log(data);
-				if (data.deletedCount) {
-					refetch();
-				}
-			})
-			.catch((err) => console.log(err));
+					return res.json();
+				})
+				.then((data) => {
+					console.log(data);
+					if (data.deletedCount) {
+						refetch();
+					}
+				})
+				.catch((err) => console.log(err));
+		}
 	};
 
 	return (
 		<div className='overflow-x-auto -z-40'>
+			<div className='text-3xl text-center mb-4'>All Buyers</div>
 			<table className='table w-full'>
 				{/* <!-- head --> */}
 				<thead>
 					<tr>
-						<th></th>
+						<td className=''></td>
 						<th>Name</th>
 						<th>email</th>
 						<th>Control</th>
@@ -67,7 +71,7 @@ const Allbuyers = () => {
 				<tbody>
 					{buyers?.map((buyer, idx) => (
 						<tr key={buyer._id}>
-							<th>{idx + 1}</th>
+							<td>{idx + 1}</td>
 							<td>{buyer.name}</td>
 							<td>{buyer.email}</td>
 							<td>

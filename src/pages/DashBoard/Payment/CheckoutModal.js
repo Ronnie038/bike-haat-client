@@ -10,7 +10,7 @@ const stripePromise = loadStripe(`${process.env.REACT_APP_stripe_pk}`);
 console.log(process.env.REACT_APP_stripe_pk);
 const CheckoutModal = ({ product, refetch }) => {
 	return (
-		<div>
+		<div data-theme='light'>
 			<input type='checkbox' id='payment-modal' className='modal-toggle' />
 			<div className='modal'>
 				<div className='modal-box relative'>

@@ -17,7 +17,7 @@ const SellerMenu = () => {
 								: 'linkRoute flex items-center mb-5'
 						}
 					>
-						<FaProductHunt className='mx-2 text-red-300' />
+						<FaProductHunt className='mx-2 text-green-300 text-xl' />
 						Add a product
 					</NavLink>
 				</li>
@@ -30,7 +30,7 @@ const SellerMenu = () => {
 								: 'linkRoute flex items-center mt-5'
 						}
 					>
-						<BsBucket className='mx-2 text-red-300' />
+						<BsBucket className='mx-2 text-green-300 text-xl' />
 						My product
 					</NavLink>
 				</li>

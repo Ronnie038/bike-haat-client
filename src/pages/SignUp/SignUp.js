@@ -2,8 +2,10 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { UseToken } from '../../ApiServices/auth';
+import { navigation } from '../../ApiServices/navigation';
 import { saveUser } from '../../ApiServices/saveUser';
+import { UseToken } from '../../ApiServices/useToken';
+import ComponentLoader from '../../Components/Loader/ComponentLoader';
 // import { getUserToken } from '../../ApiServices/auth';
 import { AuthContext } from '../../contexts/AuthProvider';
 
@@ -13,52 +15,70 @@ const SignUp = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-	const { createUser, updateUser, loginWithGoogle } = useContext(AuthContext);
+	const { createUser, updateUser, loginWithGoogle, setLoading } =
+		useContext(AuthContext);
 	const [signUpError, setSignUPError] = useState('');
-	const navigate = useNavigate();
-	const [createdUserEmail, setCreatedUserEmail] = useState('');
-	// const [token] = UseToken(createdUserEmail);
+	const [isLoading, setIsLoading] = useState(false);
 
-	// if (token) {
-	// 	navigate('/');
-	// }
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	const from = location.state?.from?.pathname || '/';
 
 	const handleSignUp = (data) => {
+		setIsLoading(true);
 		setSignUPError('');
 		createUser(data.email, data.password)
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
-
-				toast.success('User created Successfully');
-
 				const userInfo = {
 					displayName: data.name,
 				};
 				updateUser(userInfo)
 					.then(() => {
-						saveUser(user.displayName, user.email, data.role);
+						saveUser(data.name, user.email, data.role).then((data) => {
+							navigation(
+								user.email,
+								navigate,
+								from,
+								'user successfully created'
+							);
+						});
 					})
 					.catch((err) => console.log(err));
 			})
 			.catch((error) => {
 				console.log(error);
 				setSignUPError(error.code);
+			})
+			.finally(() => {
+				setLoading(false);
+				setIsLoading(false);
 			});
 	};
 
 	const googleLogin = () => {
+		setIsLoading(true);
 		loginWithGoogle()
 			.then((result) => {
 				const user = result.user;
-				saveUser(user.displayName, user.email);
+				saveUser(user.displayName, user.email).then((data) => {
+					// to navigate the user
+					navigation(user.email, navigate, from, 'successfully logged in');
+				});
+
 				console.log(user);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => console.log(err))
+			.finally(() => {
+				setLoading(false);
+				setIsLoading(false);
+			});
 	};
 
 	return (
 		<div className='h-[800px] flex justify-center items-center'>
+			{isLoading && <ComponentLoader />}
 			<div className='w-96 p-7'>
 				<h2 className='text-xl text-center'>Sign Up</h2>
 				<form onSubmit={handleSubmit(handleSignUp)}>

@@ -1,0 +1,19 @@
+.active {
+	background-color: #5d5bcc;
+	padding: 5px 10px;
+	color: white;
+	border-radius: 5px;
+	margin-left: 5px;
+	margin-bottom: 1rem;
+
+	transition: all 0.3s ease-out;
+}
+
+.btn-bg {
+	background-color: #5d5bcc;
+}
+
+.btn-delete {
+	background-color: red;
+	color: white;
+}

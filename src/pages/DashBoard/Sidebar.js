@@ -26,7 +26,7 @@ const Sidebar = () => {
 	return (
 		<>
 			{/* Small Screen Navbar */}
-			<div className='bg-gray-100 text-gray-800 flex justify-between ml-auto md:hidden'>
+			<div className=' text-gray-800  flex justify-between   md:hidden'>
 				<div>
 					<div className='block cursor-pointer p-4 font-bold'>
 						<Link to='/'>Bike-Haat</Link>
@@ -38,37 +38,30 @@ const Sidebar = () => {
 					className='mobile-menu-button p-4 focus:outline-none focus:bg-gray-700'
 				>
 					{/* <Bars3Icon className='h-5 w-5' /> */}
-					<FaBars />
+					<FaBars className='text-white' />
 				</button>
 			</div>
 			{/* Sidebar */}
 			<div
-				className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+				className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden  w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
 					isActive && '-translate-x-full'
 				}  md:translate-x-0  transition duration-200 ease-in-out`}
 			>
-				<div className='px-2'>
+				<div className='px-2 z-50'>
 					{/* Branding & Profile Info */}
 					<div>
-						<h2 className='text-3xl cursor-pointer font-semibold text-center text-gray-800 '>
+						<h2 className='text-3xl cursor-pointer font-semibold text-center text-white '>
 							<Link to='/'> Bike-Haat</Link>
 						</h2>
 						<div className='flex flex-col items-center mt-6 -mx-2'>
-							<p className=' bg-orange-300 min-w-full p-3 text-center rounded-md z-50'>
+							<p className='  bg-blue-500 font-bold  text-white min-w-full p-3 text-center rounded-md z-50'>
 								Dashboard
 							</p>
 						</div>
 					</div>
 
 					{/* Nav Items */}
-					<div className='flex flex-col justify-between flex-1 mt-6'>
-						{/* <nav>
-							{role && role !== 'requested' ? (
-								<>{role === 'admin' ? <AdminMenu /> : <HostMenu />} </>
-							) : (
-								<UserMenu />
-							)}
-						</nav> */}
+					<div className='flex flex-col justify-between flex-1 mt-6 z-50'>
 						{/* {role === 'admin' && <AdminMenu />}
 						{role === 'seller' && <SellerMenu />}
 						{role === 'buyer' && <BuyerMenu />} */}

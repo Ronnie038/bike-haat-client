@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
+import ComponentLoader from '../../../Components/Loader/ComponentLoader';
 import AdveritseCard from './AdveritseCard';
 
 const Advertisement = () => {
@@ -25,9 +26,9 @@ const Advertisement = () => {
 	console.log(advertisedProducts);
 	return (
 		<>
-			<div className='my-5'>
-				<h1 className='text-3xl text-center my-5'> Advertisement</h1>
-				<div className='flex flex-wrap'>
+			<div className='my-5 relative'>
+				<h1 className='text-3xl text-center my-5'> Advertised</h1>
+				<div className='flex flex-wrap justify-center'>
 					{advertisedProducts?.map((product) => (
 						<AdveritseCard product={product} key={product._id} />
 					))}

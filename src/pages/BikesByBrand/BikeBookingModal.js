@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
+import Loader from '../../Components/Loader/Loader';
 
 const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 	const { user } = useContext(AuthContext);
 	const { brand, model, location, _id, resale_price, img } = bikeDetail;
 
 	const [bookingDetail, setBookingDetail] = useState({});
+	const [loading, setLoading] = useState(false);
 
 	// const bookingInputOnblur = (e) => {
 	// 	setBikeDetail;
@@ -28,6 +30,7 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 			productId: _id,
 			img: img,
 		};
+		setLoading(true);
 
 		fetch(`${process.env.REACT_APP_api_url}/bookings`, {
 			method: 'post',
@@ -40,6 +43,7 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 			.then((data) => {
 				if (data.acknowledged) {
 					toast.success('congrates booked successfully');
+					setLoading(false);
 				}
 			})
 			.catch((err) => console.log(err));
@@ -48,6 +52,10 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 
 		setBikeDetail(null);
 	};
+
+	if (loading) {
+		return <Loader />;
+	}
 	return (
 		<div>
 			<input type='checkbox' id='booking-modal' className='modal-toggle' />

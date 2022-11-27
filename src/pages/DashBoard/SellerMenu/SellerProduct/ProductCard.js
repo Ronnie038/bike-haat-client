@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { deleteProductById } from '../../../../ApiServices/deleteMethods';
 
 const ProductCard = ({ product, refetch }) => {
@@ -23,11 +24,12 @@ const ProductCard = ({ product, refetch }) => {
 			.then((data) => {
 				console.log(data);
 				refetch();
+				toast.success('product deleted');
 			})
 			.catch((err) => console.log(err));
 	};
 	return (
-		<div className='card  bg-base-100 shadow-xl'>
+		<div className='card bg-base-100 w-[300px] shadow-xl'>
 			<figure>
 				<img src={img} alt='Shoes' />
 			</figure>

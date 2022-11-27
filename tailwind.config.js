@@ -5,7 +5,15 @@ module.exports = {
 		extend: {},
 	},
 	daisyui: {
-		themes: ['light', 'dark'],
+		styled: true,
+		themes: true,
+		base: true,
+		utils: true,
+		logs: true,
+		rtl: false,
+		prefix: '',
+		darkTheme: 'dark',
+		// themes: ['light', 'dark'],
 	},
 	plugins: [require('daisyui')],
 };

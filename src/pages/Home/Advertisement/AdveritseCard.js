@@ -11,7 +11,7 @@ const AdveritseCard = ({ product }) => {
 	const [isVerified, isSellerLoading] = useVerifiedSeller(email);
 
 	return (
-		<div className=' bg-base-100  shadow-xl '>
+		<div className=' bg-base-100 w-[300px] shadow-xl '>
 			<figure>
 				<img src={img} alt={model} className='' />
 			</figure>

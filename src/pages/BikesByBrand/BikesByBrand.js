@@ -5,7 +5,7 @@ import BikeBookingModal from './BikeBookingModal';
 
 const BikesByBrand = () => {
 	const bikes = useLoaderData();
-	const [bikeDetail, setBikeDetail] = useState(null);
+	const [bikeDetail, setBikeDetail] = useState([]);
 
 	console.log(bikeDetail);
 	return (

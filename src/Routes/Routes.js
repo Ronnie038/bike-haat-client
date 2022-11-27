@@ -13,6 +13,8 @@ import AddProduct from '../pages/DashBoard/SellerMenu/AddProduct/AddProduct';
 import Allbuyers from '../pages/DashBoard/AdminMenu/Allbuyers/Allbuyers';
 import Allseller from '../pages/DashBoard/AdminMenu/Allseller/Allseller';
 import BuyerOrders from '../pages/DashBoard/BuyerMenu/BuyerOrders/BuyerOrders';
+import PrivateRoute from './PrivateRoutes/PrivateRoutes';
+import AdminRoute from './PrivateRoutes/AdminRoute';
 
 const router = createBrowserRouter([
 	{
@@ -34,7 +36,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/bikes/:brand',
-				element: <BikesByBrand />,
+				element: (
+					<PrivateRoute>
+						<BikesByBrand />
+					</PrivateRoute>
+				),
 				loader: ({ params }) =>
 					fetch(`${process.env.REACT_APP_api_url}/bikes/${params.brand}`),
 			},
@@ -42,7 +48,11 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/dashboard',
-		element: <DashboardLayout />,
+		element: (
+			<PrivateRoute>
+				<DashboardLayout />
+			</PrivateRoute>
+		),
 		children: [
 			{
 				path: '',
@@ -54,11 +64,19 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'allbuyers',
-				element: <Allbuyers />,
+				element: (
+					<AdminRoute>
+						<Allbuyers />
+					</AdminRoute>
+				),
 			},
 			{
 				path: 'allsellers',
-				element: <Allseller />,
+				element: (
+					<AdminRoute>
+						<Allseller />
+					</AdminRoute>
+				),
 			},
 			{
 				path: 'addProduct',

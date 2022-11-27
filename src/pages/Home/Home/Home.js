@@ -1,4 +1,5 @@
 import React from 'react';
+import ComponentLoader from '../../../Components/Loader/ComponentLoader';
 import Navbar from '../../shared/Header/Navbar';
 import Advertisement from '../Advertisement/Advertisement';
 import Category from '../bikesByCategory/Category';
@@ -8,6 +9,7 @@ const Home = () => {
 	return (
 		<div>
 			<Hero />
+
 			<Advertisement />
 			<Category />
 		</div>

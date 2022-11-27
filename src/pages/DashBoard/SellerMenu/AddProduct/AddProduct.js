@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import ComponentLoader from '../../../../Components/Loader/ComponentLoader';
+import Loader from '../../../../Components/Loader/Loader';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 
 const AddProduct = () => {
@@ -9,12 +11,15 @@ const AddProduct = () => {
 		register,
 		formState: { errors },
 		handleSubmit,
+		reset,
 	} = useForm();
 	const { user } = useContext(AuthContext);
+	const [loading, setLoading] = useState(false);
 	const img_host_key = process.env.REACT_APP_imgbb_key;
 	// console.log(img_host_key);
 
 	const handleAddBike = (data) => {
+		setLoading(true);
 		console.log(data);
 		// console.log(data.photo[0]);
 		const image = data.photo[0];
@@ -63,18 +68,22 @@ const AddProduct = () => {
 						.then((res) => res.json())
 						.then((data) => {
 							console.log(data);
-							toast.success('successfully img hosted');
+							toast.success('successfully product added');
+							reset();
 						})
 						.catch((err) => console.log(err));
 				}
 			})
-			.catch((err) => console.log(err));
-
-		// console.log(bikeDetailObj);
+			.catch((err) => console.log(err))
+			.finally(() => {
+				setLoading(false);
+			});
 	};
+
 	return (
 		<div>
-			<div className=' flex justify-center items-center'>
+			<div className=' flex justify-center items-center relative'>
+				{loading && <ComponentLoader />}
 				<div className='w-96 p-7'>
 					<h2 className='text-xl text-center'>Add your product here</h2>
 					<form onSubmit={handleSubmit(handleAddBike)}>
@@ -277,7 +286,7 @@ const AddProduct = () => {
 						</div>
 
 						<input
-							className='btn btn-accent w-full text-white my-2'
+							className='btn btn-bg w-full text-white my-2'
 							value='Add Product'
 							type='submit'
 						/>

@@ -3,9 +3,11 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { navigation } from '../../ApiServices/navigation';
 import { saveUser } from '../../ApiServices/saveUser';
-// import { UseToken } from '../../ApiServices/auth';
-// import { getUserToken } from '../../ApiServices/auth';
+import { UseToken } from '../../ApiServices/useToken';
+import ComponentLoader from '../../Components/Loader/ComponentLoader';
+
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
@@ -14,56 +16,63 @@ const Login = () => {
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
-	const { signIn, loginWithGoogle } = useContext(AuthContext);
+	const { signIn, loginWithGoogle, setLoading } = useContext(AuthContext);
 
 	const [loginError, setLoginError] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
-	const [loginUserEmail, setLoginUserEmail] = useState('');
-	// const [token] = UseToken(loginUserEmail);
 	const location = useLocation();
 	const navigate = useNavigate();
 
 	const from = location.state?.from?.pathname || '/';
-	// if (token) {
-	// 	navigate(from, { replace: true });
-	// }
 
 	const handleLogin = (data) => {
+		setIsLoading(true);
 		console.log(data);
 		setLoginError('');
 		signIn(data.email, data.password)
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
-				// console.log(user);
-				// getUserToken(data.email).then((data) => {
-				// 	if (data) {
-				// 		navigate('/');
-				// 	}
-				// });
 
-				navigate('/');
-				toast.success('login successfull');
-				setLoginUserEmail(data.email);
+				// to navigate user
+				navigation(user.email, navigate, from, 'successfully logged in');
 			})
 			.catch((error) => {
 				console.log(error.message);
 				setLoginError(error.message);
+			})
+			.finally(() => {
+				setLoading(false);
+				setIsLoading(false);
 			});
 	};
 
 	const googleLogin = () => {
+		setIsLoading(true);
 		loginWithGoogle()
 			.then((result) => {
 				const user = result.user;
-				saveUser(user.displayName, user.email);
+				saveUser(user.displayName, user.email).then((data) => {
+					// to navigate user
+					navigation(user.email, navigate, from, 'successfully logged in');
+				});
 				console.log(user);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => console.log(err))
+			.finally(() => {
+				setLoading(false);
+				setIsLoading(false);
+			});
 	};
+
+	// if (isLoading) {
+	// 	return <div>Loading</div>;
+	// }
 
 	return (
 		<div className='h-[800px] flex justify-center items-center'>
+			{isLoading && <ComponentLoader />}
 			<div className='w-96 p-7'>
 				<h2 className='text-xl text-center'>Login</h2>
 				<form onSubmit={handleSubmit(handleLogin)}>

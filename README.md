@@ -1,6 +1,7 @@
 # admin email = admin@bike-haat.com
 
 # admin password = admin123
+# please check cors policy when verifying a seller 
 
 website link = https://bike-haat.web.app/
 
@@ -13,13 +14,14 @@ website link = https://bike-haat.web.app/
 4. Your Jason token will expire after one day of login
 5. there are three layer of users buyer, seller and admin.
 6. buyer only can access his booked orders.
-7. and users can report product to admin . in that case admin can delete reported items . from reported products route. which is only admin has the access.
-8. sellers can access add product route and their product routes.
-9. also seller can delete his product and can advirtise his product .
-10. advirtised products will appear in home page .
-11. if anyone buy any product that product will not show any where .
-12. admin can delete sellers as well as buyers .
-13. admin can verify a seller from all sellers route.
+7. this app has payment getway with card by using stripe react.
+8. and users can report product to admin . in that case admin can delete reported items . from reported products route. which is only admin has the access.
+9. sellers can access add product route and their product routes.
+10. also seller can delete his product and can advirtise his product .
+11. advirtised products will appear in home page .
+12. if anyone buy any product that product will not show any where .
+13. admin can delete sellers as well as buyers .
+14. admin can verify a seller from all sellers route.
 
 # Technologies
 

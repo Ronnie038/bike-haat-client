@@ -1,6 +1,7 @@
 # admin email = admin@bike-haat.com
 
 # admin password = admin123
+# please check cors policy when verifying a seller 
 
 website link = https://bike-haat.web.app/
 

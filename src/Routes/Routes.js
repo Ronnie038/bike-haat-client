@@ -20,6 +20,7 @@ import ErrorElement from '../pages/ErrorElement/ErrorElement';
 import WelcomePage from '../pages/DashBoard/WelcomeDashBoard/WelcomePage';
 import SellerRoute from './PrivateRoutes/SellerRoute';
 import Blogs from '../pages/Blog/Blogs';
+import { FaBandAid } from 'react-icons/fa';
 
 const router = createBrowserRouter([
 	{
@@ -46,12 +47,14 @@ const router = createBrowserRouter([
 			{
 				path: '/bikes/:brand',
 
-				loader: ({ params }) =>
-					fetch(`${process.env.REACT_APP_api_url}/bikes/${params.brand}`, {
-						headers: {
-							authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-						},
-					}),
+				loader: ({ params }) => {
+					return params;
+				},
+				// fetch(`${process.env.REACT_APP_api_url}/bikes/${params.brand}`, {
+				// 	headers: {
+				// 		authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+				// 	},
+				// }),
 				element: (
 					<PrivateRoute>
 						<BikesByBrand />

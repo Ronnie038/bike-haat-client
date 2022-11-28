@@ -25,9 +25,8 @@ website link = https://bike-haat.web.app/
 
 1. tailwind css
 2. react hot toast
-3. eact router dom to route
+3. react router dom to route
 4. react icon
-5. react photo view
-6. firebse
-7. json web token
-8. react stripe
+5. firebase
+6. json web token
+7. react stripe

@@ -1,13 +1,13 @@
 const verifySellerById = async (id) => {
-	const res = await fetch(`${process.env.REACT_APP_api_url}/verifySeller`, {
-		method: 'put',
-		headers: {
-			'content-type': 'application/json',
-
-			authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-		},
-		body: JSON.stringify({ id }),
-	});
+	const res = await fetch(
+		`${process.env.REACT_APP_api_url}/verifySeller/${id}`,
+		{
+			method: 'put',
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+			},
+		}
+	);
 	const data = res.json();
 
 	return data;

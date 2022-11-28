@@ -5,7 +5,6 @@ import { MdVerified } from 'react-icons/md';
 import useVerifiedSeller from '../../ApiServices/useVerifiedSeller';
 
 const Bike = ({ bike, setBikeDetail }) => {
-	console.log(bike);
 	const {
 		brand,
 		condition,

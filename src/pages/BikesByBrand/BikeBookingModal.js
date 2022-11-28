@@ -38,7 +38,7 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
+				// console.log(data);
 				if (data.acknowledged) {
 					toast.success('congrates booked successfully');
 				}

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { deleteUserById } from '../../../../ApiServices/deleteMethods';
@@ -11,6 +11,7 @@ import { AuthContext } from '../../../../contexts/AuthProvider';
 
 const Allbuyers = () => {
 	const { logOut } = useContext(AuthContext);
+	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 	const {
 		data: buyers = [],
@@ -32,6 +33,7 @@ const Allbuyers = () => {
 		const confirm = window.confirm('are you sure you want to delete');
 		console.log(id);
 		if (confirm) {
+			setLoading(true);
 			deleteUserById(id)
 				.then((res) => {
 					if (res.status === 403 || res.status === 401) {
@@ -51,12 +53,18 @@ const Allbuyers = () => {
 						refetch();
 					}
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => console.log(err))
+				.finally(() => {
+					setLoading(false);
+				});
 		}
 	};
-
+	if (isLoading) {
+		return <ComponentLoader />;
+	}
 	return (
 		<div className='overflow-x-auto -z-40'>
+			{loading && <ComponentLoader />}
 			<div className='text-3xl text-center mb-4'>All Buyers</div>
 			<table className='table w-full'>
 				{/* <!-- head --> */}

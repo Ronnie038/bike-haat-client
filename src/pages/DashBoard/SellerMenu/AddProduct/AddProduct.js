@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import ComponentLoader from '../../../../Components/Loader/ComponentLoader';
 import Loader from '../../../../Components/Loader/Loader';
 import { AuthContext } from '../../../../contexts/AuthProvider';
@@ -14,8 +14,9 @@ const AddProduct = () => {
 		reset,
 	} = useForm();
 	const [nav, setNav] = useState(false);
-	const { user } = useContext(AuthContext);
+	const { user, logOut } = useContext(AuthContext);
 	const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
 
 	const img_host_key = process.env.REACT_APP_imgbb_key;
 
@@ -63,14 +64,23 @@ const AddProduct = () => {
 						method: 'post',
 						headers: {
 							'content-type': 'application/json',
+							authorization: `Bearer ${localStorage.getItem('accessToken')}`,
 						},
 						body: JSON.stringify(bikeDetailObj),
 					})
-						.then((res) => res.json())
+						.then((res) => {
+							if (res.status === 403 || res.status === 401) {
+								navigate('/');
+								logOut();
+								return;
+							} else {
+								return res.json();
+							}
+						})
 						.then((data) => {
-							console.log(data);
-							toast.success('successfully product added');
+							if (!data) return;
 							setNav(true);
+							toast.success('successfully product added');
 						})
 						.catch((err) => console.log(err));
 				}

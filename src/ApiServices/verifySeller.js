@@ -3,6 +3,8 @@ const verifySellerById = async (id) => {
 		method: 'put',
 		headers: {
 			'content-type': 'application/json',
+
+			authorization: `Bearer ${localStorage.getItem('accessToken')}`,
 		},
 		body: JSON.stringify({ id }),
 	});

@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import React, { useContext } from 'react';
+import React, { Component, useContext } from 'react';
 import toast from 'react-hot-toast';
 import { MdVerified } from 'react-icons/md';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { deleteUserById } from '../../../../ApiServices/deleteMethods';
 import getUsersByRole from '../../../../ApiServices/getUsersByRole';
 import verifySellerById from '../../../../ApiServices/verifySeller';
+import ComponentLoader from '../../../../Components/Loader/ComponentLoader';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 
 const Allseller = () => {
@@ -58,6 +59,10 @@ const Allseller = () => {
 			})
 			.catch((err) => console.log(err));
 	};
+
+	if (isLoading) {
+		return <ComponentLoader />;
+	}
 	return (
 		<div className='overflow-x-auto'>
 			<table className='table w-full'>

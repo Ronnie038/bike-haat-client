@@ -24,7 +24,7 @@ const Category = () => {
 	}
 
 	return (
-		<div className='my-5'>
+		<div className='my-5 shadow-xl shadow-blue-500/10 p-5'>
 			<h1 className='text-3xl text-center my-5'> What are you looking for?</h1>
 
 			<hr className='mb-5 md:w-2/4 w-full mx-auto' />

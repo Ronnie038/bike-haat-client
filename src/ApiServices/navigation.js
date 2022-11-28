@@ -6,7 +6,7 @@ const navigation = (email, navigate, from, message) => {
 		if (data.accessToken) {
 			localStorage.setItem('accessToken', data.accessToken);
 			toast.success(message);
-			console.log(data);
+			// console.log(data);
 		}
 
 		navigate(from, { replace: true });

@@ -6,9 +6,11 @@ import axios from 'axios';
 // import CheckoutModal from '../../Payment/CheckoutModal';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 import CheckoutModal from '../../Payment/CheckoutModal';
+import ComponentLoader from '../../../../Components/Loader/ComponentLoader';
+import toast from 'react-hot-toast';
 
 const BuyerOrders = () => {
-	const { user } = useContext(AuthContext);
+	const { user, logOut } = useContext(AuthContext);
 	// const [bookings, setBookings] = useState([]);
 	const [toggle, setToggle] = useState(false);
 
@@ -23,18 +25,30 @@ const BuyerOrders = () => {
 		queryFn: async () => {
 			try {
 				const res = axios.get(
-					`${process.env.REACT_APP_api_url}/bookings?email=${user?.email}`
+					`${process.env.REACT_APP_api_url}/bookings?email=${user?.email}`,
+					{
+						headers: {
+							'content-type': 'application/json',
+							authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+						},
+					}
 				);
+				console.log(res);
 
 				return (await res).data;
 			} catch (err) {
 				console.log(err);
+				if (err.response.status === 401 || err.response.status === 403) {
+					logOut().then(() => {
+						toast.error('permission forbidden');
+					});
+				}
 			}
 		},
 	});
 
 	if (isLoading) {
-		return <div className='text-3xl'>......LOADING</div>;
+		return <ComponentLoader />;
 	}
 
 	// useEffect(() => {

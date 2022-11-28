@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import useRoutesByRole from '../../ApiServices/useRoutesByRole';
-import Loader from '../../Components/Loader/Loader';
+import ComponentLoader from '../../Components/Loader/ComponentLoader';
+
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const SellerRoute = ({ children }) => {
@@ -14,7 +15,7 @@ const SellerRoute = ({ children }) => {
 	}
 
 	if (loading || isRoleLoading) {
-		return <Loader />;
+		return <ComponentLoader />;
 	}
 
 	return <Navigate to='/login' state={{ from: location }} replace></Navigate>;

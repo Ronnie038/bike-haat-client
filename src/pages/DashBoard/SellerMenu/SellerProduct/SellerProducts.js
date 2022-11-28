@@ -4,9 +4,11 @@ import React, { useContext } from 'react';
 import ComponentLoader from '../../../../Components/Loader/ComponentLoader';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 import ProductCard from './ProductCard';
+import { useNavigate } from 'react-router-dom';
 
 const SellerProduct = () => {
-	const { user } = useContext(AuthContext);
+	const { user, logOut } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	const {
 		data: sellerProducts = [],
@@ -19,12 +21,20 @@ const SellerProduct = () => {
 			try {
 				const res = await axios.get(
 					`${process.env.REACT_APP_api_url}/sellerProducts/${user?.email}`,
-					{}
+					{
+						headers: {
+							authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+						},
+					}
 				);
 				console.log(res);
 
 				return await res.data;
 			} catch (err) {
+				if (err.response.status === 401 || err.response.status === 403) {
+					logOut();
+					navigate('/');
+				}
 				console.log(err);
 			}
 		},

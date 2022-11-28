@@ -31,10 +31,17 @@ const Bike = ({ bike, setBikeDetail }) => {
 	const handleReport = (id) => {
 		fetch(`${process.env.REACT_APP_api_url}/reported/${id}`, {
 			method: 'PUT',
+			headers: {
+				'content-type': 'application/json',
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+			},
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				toast.success('reported product');
+				if (data.acknowledged) {
+					toast.success('reported to admin');
+				}
+
 				console.log(data);
 			})
 			.catch((err) => console.log(err));

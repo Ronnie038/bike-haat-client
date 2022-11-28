@@ -18,6 +18,8 @@ import AdminRoute from './PrivateRoutes/AdminRoute';
 import ReportedItems from '../pages/DashBoard/AdminMenu/ReportedItems/ReportedItems';
 import ErrorElement from '../pages/ErrorElement/ErrorElement';
 import WelcomePage from '../pages/DashBoard/WelcomeDashBoard/WelcomePage';
+import SellerRoute from './PrivateRoutes/SellerRoute';
+import Blogs from '../pages/Blog/Blogs';
 
 const router = createBrowserRouter([
 	{
@@ -38,14 +40,23 @@ const router = createBrowserRouter([
 				element: <SignUp></SignUp>,
 			},
 			{
+				path: '/blogs',
+				element: <Blogs />,
+			},
+			{
 				path: '/bikes/:brand',
+
+				loader: ({ params }) =>
+					fetch(`${process.env.REACT_APP_api_url}/bikes/${params.brand}`, {
+						headers: {
+							authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+						},
+					}),
 				element: (
 					<PrivateRoute>
 						<BikesByBrand />
 					</PrivateRoute>
 				),
-				loader: ({ params }) =>
-					fetch(`${process.env.REACT_APP_api_url}/bikes/${params.brand}`),
 			},
 		],
 	},
@@ -92,11 +103,19 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'addProduct',
-				element: <AddProduct />,
+				element: (
+					<SellerRoute>
+						<AddProduct />
+					</SellerRoute>
+				),
 			},
 			{
 				path: 'myProduct',
-				element: <SellerProduct />,
+				element: (
+					<SellerRoute>
+						<SellerProduct />
+					</SellerRoute>
+				),
 			},
 		],
 	},

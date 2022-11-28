@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { deleteProductById } from '../../../../ApiServices/deleteMethods';
 import useRoutesByRole from '../../../../ApiServices/useRoutesByRole';
+import ComponentLoader from '../../../../Components/Loader/ComponentLoader';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 
 const ReportedItems = () => {
@@ -15,11 +16,17 @@ const ReportedItems = () => {
 		refetch,
 		isLoading,
 	} = useQuery({
-		queryKey: ['reporteditem'],
+		queryKey: ['reporteditem', user],
 		queryFn: async () => {
 			try {
 				const res = await fetch(
-					`${process.env.REACT_APP_api_url}/reporteditem`
+					`${process.env.REACT_APP_api_url}/reporteditem`,
+					{
+						headers: {
+							'content-type': 'application/json',
+							authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+						},
+					}
 				);
 				const data = await res.json();
 
@@ -51,6 +58,10 @@ const ReportedItems = () => {
 			})
 			.catch((err) => console.log(err));
 	};
+
+	if (isLoading) {
+		return <ComponentLoader />;
+	}
 	return (
 		<div>
 			<h1 className='text-2xl  mb-5 font-bold text-center my-3'>

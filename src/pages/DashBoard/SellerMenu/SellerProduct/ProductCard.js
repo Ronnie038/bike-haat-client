@@ -10,11 +10,14 @@ const ProductCard = ({ product, refetch }) => {
 			method: 'put',
 			headers: {
 				'content-type': 'application/json',
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`,
 			},
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
+				if (data.acknowledged) {
+					toast.success('product advirtised');
+				}
 			})
 			.catch((err) => console.log(err));
 	};

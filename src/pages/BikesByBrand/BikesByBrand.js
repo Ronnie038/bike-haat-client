@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import {
+	useLoaderData,
+	isRouteErrorResponse,
+	useRouteError,
+} from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 import Bike from './Bike';
 import BikeBookingModal from './BikeBookingModal';
 
-const BikesByBrand = () => {
+const BikesByBrand = (id) => {
+	const { logOut } = useContext(AuthContext);
+	const error = useRouteError();
+	// const routerErr = isRouteErrorResponse(error);
+	// console.log(error);
+	// console.log(error.status);
+	console.log(id);
+
 	const bikes = useLoaderData();
+
 	const [bikeDetail, setBikeDetail] = useState([]);
 
-	console.log(bikeDetail);
+	if (isRouteErrorResponse(error)) {
+		return logOut();
+	}
 	return (
 		<>
 			<div>

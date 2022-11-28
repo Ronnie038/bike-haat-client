@@ -9,13 +9,4 @@ export const saveUser = async (name, email, role = 'buyer') => {
 	});
 
 	return await res.json();
-	// .then((res) => res.json())
-	// .then((data) => {
-	// console.log(data);
-	// setCreatedUserEmail(email);
-	// getUserToken(email).then(() => {
-
-	// });
-	// })
-	// .catch((err) => console.log(err));
 };

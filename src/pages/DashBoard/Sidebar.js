@@ -10,7 +10,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 import AdminMenu from './AdminMenu/AdminMenu';
 import BuyerMenu from './BuyerMenu/BuyerMenu';
 import SellerMenu from './SellerMenu/SellerMenu';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaUser } from 'react-icons/fa';
 import useRoutesByRole from '../../ApiServices/useRoutesByRole';
 
 const Sidebar = ({ sideActive, setSideActive }) => {
@@ -39,10 +39,11 @@ const Sidebar = ({ sideActive, setSideActive }) => {
 					<div className='dropdown dropdown-end mt-2  '>
 						<label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
 							<div className='w-10 rounded-full'>
-								<img
-									src='https://placeimg.com/80/80/people'
-									alt='user profile img'
-								/>
+								{user?.photoURL ? (
+									<img src={user?.photoURL} alt='user profile img' />
+								) : (
+									<FaUser className='text-info mt-3 ml-3' />
+								)}
 							</div>
 						</label>
 						<ul
@@ -93,25 +94,13 @@ const Sidebar = ({ sideActive, setSideActive }) => {
 
 					{/* Nav Items */}
 					<div className='flex flex-col justify-between flex-1 mt-6 z-50'>
-						{/* {role === 'admin' && <AdminMenu />}
+						{role === 'admin' && <AdminMenu />}
 						{role === 'seller' && <SellerMenu />}
-						{role === 'buyer' && <BuyerMenu />} */}
-						<AdminMenu />
+						{role === 'buyer' && <BuyerMenu />}
+						{/* <AdminMenu />
 						<SellerMenu />
-						<BuyerMenu />
+						<BuyerMenu /> */}
 					</div>
-				</div>
-
-				<div>
-					{/* <hr /> */}
-					{/* <PrimaryButton
-						handler={logout}
-						classes='flex block w-full rounded-full items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform'
-					> */}
-					{/* <ArrowRightOnRectangleIcon className='w-5 h-5' /> */}
-
-					{/* <span className='mx-4 font-medium'>Logout</span> */}
-					{/* </PrimaryButton> */}
 				</div>
 			</div>
 		</>

@@ -32,11 +32,13 @@ const BikeBookingModal = ({ bikeDetail, setBikeDetail }) => {
 			method: 'post',
 			headers: {
 				'content-type': 'application/json',
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`,
 			},
 			body: JSON.stringify(bookigOBJ),
 		})
 			.then((res) => res.json())
 			.then((data) => {
+				console.log(data);
 				if (data.acknowledged) {
 					toast.success('congrates booked successfully');
 				}

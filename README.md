@@ -2,6 +2,10 @@
 
 # admin password = admin123
 # please check cors policy when verifying a seller 
+# The payment method is working in localhost but after deployment, payment method is not working.
+# but still working in localhost
+# please consider the issue
+# I showed my problem in the conceptual session he said to submit it will consider it
 
 website link = https://bike-haat.web.app/
 

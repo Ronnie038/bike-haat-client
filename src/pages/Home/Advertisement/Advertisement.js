@@ -23,7 +23,6 @@ const Advertisement = () => {
 		return;
 	}
 
-	console.log(advertisedProducts);
 	return (
 		<>
 			<div className='my-5 relative shadow-lg shadow-cyan-200/10 '>

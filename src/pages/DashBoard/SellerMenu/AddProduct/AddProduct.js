@@ -22,8 +22,6 @@ const AddProduct = () => {
 
 	const handleAddBike = (data) => {
 		setLoading(true);
-		console.log(data);
-		// console.log(data.photo[0]);
 		const image = data.photo[0];
 		const formData = new FormData();
 		formData.append('image', image);

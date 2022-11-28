@@ -28,12 +28,11 @@ const Login = () => {
 
 	const handleLogin = (data) => {
 		setIsLoading(true);
-		console.log(data);
+
 		setLoginError('');
 		signIn(data.email, data.password)
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
 
 				// to navigate user
 				navigation(user.email, navigate, from, 'successfully logged in');
@@ -57,7 +56,6 @@ const Login = () => {
 					// to navigate user
 					navigation(user.email, navigate, from, 'successfully logged in');
 				});
-				console.log(user);
 			})
 			.catch((err) => console.log(err))
 			.finally(() => {

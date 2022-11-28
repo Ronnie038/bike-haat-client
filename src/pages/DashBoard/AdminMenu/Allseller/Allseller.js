@@ -27,7 +27,6 @@ const Allseller = () => {
 			return res.data;
 		},
 	});
-	console.log(sellers);
 
 	const handleDelete = (id) => {
 		const confirm = window.confirm('are you sure you want to delete');
@@ -54,7 +53,6 @@ const Allseller = () => {
 	const verifySeller = (id) => {
 		verifySellerById(id)
 			.then((data) => {
-				console.log(data);
 				refetch();
 			})
 			.catch((err) => console.log(err));

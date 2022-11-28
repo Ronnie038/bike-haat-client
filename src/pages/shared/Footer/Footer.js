@@ -48,7 +48,7 @@ const Footer = () => {
 				</div>
 			</div>
 			<div>
-				<p>Copyright © 2022 - All right reserved by ACME Industries Ltd</p>
+				<p>Copyright © 2022 - All right reserved by bike-haat</p>
 			</div>
 		</footer>
 	);

@@ -7,7 +7,6 @@ const WelcomePage = () => {
 	const { user } = useContext(AuthContext);
 
 	const [role, isRoleLoading] = useRoutesByRole(user?.email);
-	console.log(role);
 
 	if (isRoleLoading) {
 		return <ComponentLoader />;

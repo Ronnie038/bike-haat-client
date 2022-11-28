@@ -8,7 +8,7 @@ const useRoutesByRole = (email) => {
 		fetch(`${process.env.REACT_APP_api_url}/useRole/${email}`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
+				// console.log(data);
 				setIsRoleLoading(false);
 				setRole(data.role);
 			})

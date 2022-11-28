@@ -24,7 +24,7 @@ const Sidebar = ({ sideActive, setSideActive }) => {
 		setActive(!isActive);
 		setSideActive(true);
 	};
-	console.log({ sideActive });
+
 	return (
 		<>
 			{/* Small Screen Navbar */}

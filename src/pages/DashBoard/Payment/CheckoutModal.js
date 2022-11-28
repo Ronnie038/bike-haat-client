@@ -7,7 +7,6 @@ import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_stripe_pk}`);
 
-console.log(process.env.REACT_APP_stripe_pk);
 const CheckoutModal = ({ product, refetch }) => {
 	return (
 		<div data-theme='light'>

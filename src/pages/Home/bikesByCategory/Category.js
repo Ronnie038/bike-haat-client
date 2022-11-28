@@ -17,8 +17,6 @@ const Category = () => {
 		},
 	});
 
-	console.log(brands);
-
 	if (isLoading) {
 		return <ComponentLoader />;
 	}

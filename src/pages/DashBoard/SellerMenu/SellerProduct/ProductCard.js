@@ -28,7 +28,6 @@ const ProductCard = ({ product, refetch }) => {
 
 		deleteProductById(id)
 			.then((data) => {
-				console.log(data);
 				refetch();
 				toast.success('product deleted');
 			})

@@ -18,8 +18,6 @@ const CheckoutPage = ({ booking, refetch }) => {
 	const elements = useElements();
 	const { price, patient, email, _id, productId } = booking;
 
-	console.log(clientSecret);
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// console.log('hello');
@@ -30,7 +28,6 @@ const CheckoutPage = ({ booking, refetch }) => {
 
 		const card = elements.getElement(CardElement);
 
-		console.log(card);
 		if (card === null) {
 			return;
 		}
@@ -65,7 +62,6 @@ const CheckoutPage = ({ booking, refetch }) => {
 		}
 
 		if (paymentIntent.status === 'succeeded') {
-			console.log({ card });
 			const payment = {
 				price,
 				transactionId: paymentIntent.id,
@@ -88,6 +84,7 @@ const CheckoutPage = ({ booking, refetch }) => {
 						setSuccess('Congrates! your payment completed');
 						setTransactionId(paymentIntent.id);
 						toast.success('payment successfull');
+						refetch();
 					}
 				})
 				.catch((err) => console.log(err));

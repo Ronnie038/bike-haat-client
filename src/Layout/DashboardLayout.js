@@ -15,7 +15,7 @@ const DashboardLayout = () => {
 		setSideActive(false);
 		console.log('hello');
 	};
-	console.log(user);
+
 	return (
 		<div className='relative mx-auto min-h-screen md:flex max-w-7xl'>
 			{/* {loading ? (

@@ -27,11 +27,9 @@ const Allbuyers = () => {
 		},
 	});
 
-	console.log(buyers);
-
 	const handleDelete = (id) => {
 		const confirm = window.confirm('are you sure you want to delete');
-		console.log(id);
+
 		if (confirm) {
 			setLoading(true);
 			deleteUserById(id)
@@ -48,7 +46,6 @@ const Allbuyers = () => {
 					return res.json();
 				})
 				.then((data) => {
-					console.log(data);
 					if (data.deletedCount) {
 						refetch();
 					}

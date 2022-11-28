@@ -23,7 +23,7 @@ const Bike = ({ bike, setBikeDetail }) => {
 		_id,
 	} = bike;
 
-	console.log(email);
+	// console.log(email);
 
 	const [rating, setRating] = useState([0, 0, 0, 0, 0]);
 	const [isVerified, isSellerLoading] = useVerifiedSeller(email);
@@ -42,7 +42,7 @@ const Bike = ({ bike, setBikeDetail }) => {
 					toast.success('reported to admin');
 				}
 
-				console.log(data);
+				// console.log(data);
 			})
 			.catch((err) => console.log(err));
 	};

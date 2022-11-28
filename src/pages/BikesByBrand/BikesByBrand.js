@@ -14,7 +14,7 @@ const BikesByBrand = (id) => {
 	// const routerErr = isRouteErrorResponse(error);
 	// console.log(error);
 	// console.log(error.status);
-	console.log(id);
+	// console.log(id);
 
 	const bikes = useLoaderData();
 

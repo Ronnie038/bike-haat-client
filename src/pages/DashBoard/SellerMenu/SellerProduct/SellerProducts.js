@@ -27,7 +27,6 @@ const SellerProduct = () => {
 						},
 					}
 				);
-				console.log(res);
 
 				return await res.data;
 			} catch (err) {

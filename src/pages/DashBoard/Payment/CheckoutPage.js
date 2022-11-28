@@ -14,9 +14,29 @@ const CheckoutPage = ({ booking, refetch }) => {
 	const [transactionId, setTransactionId] = useState('');
 	const [clientSecret, setClientSecret] = useState('');
 	const [processing, setProcessing] = useState(false);
+	console.log(clientSecret);
 	const stripe = useStripe();
 	const elements = useElements();
 	const { price, patient, email, _id, productId } = booking;
+	parseInt(price);
+	console.log(typeof price);
+
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_api_url}/create-payment-intent`, {
+			method: 'post',
+			headers: {
+				'content-type': 'application/json',
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+			},
+			body: JSON.stringify({ price: price }),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				setClientSecret(data.clientSecret);
+			})
+			.catch((err) => console.log(err));
+	}, [price]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -92,22 +112,6 @@ const CheckoutPage = ({ booking, refetch }) => {
 		setProcessing(false);
 	};
 
-	useEffect(() => {
-		fetch(`${process.env.REACT_APP_api_url}/create-payment-intent`, {
-			method: 'POST',
-			headers: {
-				'content-type': 'application/json',
-				authorization: `bearer ${localStorage.getItem('accessToken')}`,
-			},
-			body: JSON.stringify({ price }),
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				setClientSecret(data.clientSecret);
-				refetch();
-			})
-			.catch((err) => console.log(err));
-	}, [price]);
 	return (
 		<>
 			<form onSubmit={handleSubmit}>

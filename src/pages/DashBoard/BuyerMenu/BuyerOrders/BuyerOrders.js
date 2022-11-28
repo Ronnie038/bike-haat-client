@@ -50,13 +50,6 @@ const BuyerOrders = () => {
 		return <ComponentLoader />;
 	}
 
-	// useEffect(() => {
-	// 	axios
-	// 		.get(`${process.env.REACT_APP_api_url}/bookings?email=${user?.email}`)
-	// 		.then((res) => setBookings(res.data))
-	// 		.catch((err) => console.log(err));
-	// }, [user?.email]);
-
 	return (
 		<div className='overflow-x-auto w-full'>
 			<div className=' border-b-2 mb-5'>
@@ -124,7 +117,13 @@ const BuyerOrders = () => {
 			)}
 
 			{/* <CheckoutModal /> */}
-			{product && <CheckoutModal product={product} refetch={refetch} />}
+			{product && (
+				<CheckoutModal
+					product={product}
+					setProduct={setProduct}
+					refetch={refetch}
+				/>
+			)}
 		</div>
 	);
 };

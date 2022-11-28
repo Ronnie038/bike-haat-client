@@ -7,7 +7,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_stripe_pk}`);
 
-const CheckoutModal = ({ product, refetch }) => {
+const CheckoutModal = ({ product, refetch, setProduct }) => {
 	return (
 		<div data-theme='light'>
 			<input type='checkbox' id='payment-modal' className='modal-toggle' />
@@ -16,6 +16,7 @@ const CheckoutModal = ({ product, refetch }) => {
 					<label
 						htmlFor='payment-modal'
 						className='btn btn-sm btn-circle absolute right-2 top-2'
+						onClick={() => setProduct(null)}
 					>
 						✕
 					</label>

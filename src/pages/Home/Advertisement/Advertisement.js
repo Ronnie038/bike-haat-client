@@ -28,7 +28,7 @@ const Advertisement = () => {
 			<div className='my-5 relative shadow-lg shadow-cyan-200/10 '>
 				<h1 className='text-3xl text-center my-5'> Advertised</h1>
 				<hr className='mb-5 w-1/3 mx-auto' />
-				<div className='flex flex-wrap justify-center'>
+				<div className='flex flex-wrap gap-3 justify-center'>
 					{advertisedProducts?.map((product) => (
 						<AdveritseCard product={product} key={product._id} />
 					))}

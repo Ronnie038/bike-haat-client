@@ -28,9 +28,9 @@ const Sidebar = ({ sideActive, setSideActive }) => {
 	return (
 		<>
 			{/* Small Screen Navbar */}
-			<div className=' text-gray-800  flex justify-between   md:hidden'>
+			<div className=' bg-base-200 text-gray-800  flex justify-between   md:hidden'>
 				<div>
-					<div className='block cursor-pointer text-white p-4 font-bold'>
+					<div className='block cursor-pointer text-black p-4 font-bold'>
 						<Link to='/'>Bike-Haat</Link>
 					</div>
 				</div>
@@ -48,7 +48,7 @@ const Sidebar = ({ sideActive, setSideActive }) => {
 						</label>
 						<ul
 							tabIndex={0}
-							className='menu menu-compact bg-white dropdown-content mt-3 p-2 shadow rounded-box w-52'
+							className='menu menu-compact bg-black dropdown-content mt-3 p-2 shadow rounded-box w-52'
 						>
 							<li>
 								<Link className='justify-between'>{user?.displayName}</Link>
@@ -67,25 +67,25 @@ const Sidebar = ({ sideActive, setSideActive }) => {
 						className='mobile-menu-button p-4 focus:outline-none focus:bg-gray-700'
 					>
 						{/* <Bars3Icon className='h-5 w-5' /> */}
-						<FaBars className='text-white' />
+						<FaBars className='text-black' />
 					</button>
 				</div>
 			</div>
 			{/* Sidebar */}
 			<div
-				data-theme='dark'
-				className={`z-10  shadow-lg md:fixed flex flex-col justify-between overflow-x-hidden  w-64 space-y-6  py-4 absolute inset-y-0 left-0 transform ${
+				data-theme=''
+				className={`z-10 bg-white  shadow-lg md:fixed flex flex-col justify-between overflow-x-hidden  w-64 space-y-6  py-4 absolute inset-y-0 left-0 transform ${
 					(isActive || !sideActive) && '-translate-x-full'
 				}  md:translate-x-0  transition duration-200 ease-in-out`}
 			>
 				<div className=' z-50 px-3'>
 					{/* Branding & Profile Info */}
 					<div>
-						<h2 className='text-3xl cursor-pointer font-semibold text-center text-white '>
+						<h2 className='text-3xl cursor-pointer font-semibold text-center text-black '>
 							<Link to='/'> Bike-Haat</Link>
 						</h2>
-						<div className='flex w-full bg-blue-500  flex-col items-center mt-6 '>
-							<p className='p-3  font-bold  text-white min-w-full  text-center rounded-md z-50'>
+						<div className='flex w-full   flex-col items-center mt-6 '>
+							<p className='p-3 bg-green-600  font-bold  text-white min-w-full  text-center rounded-md z-50'>
 								<Link to='/dashboard'>Dashboard</Link>
 							</p>
 						</div>
